@@ -9,7 +9,11 @@ import './ZLayout.css';
 
 const Buttonsgrp = () => {
     const [value, setValue] = React.useState(0);
-    const {id}=useUser();
+    const {arr,arrW,arrAc}=useUser();
+    const arrLength=arr.length;
+    const arrWLength=arrW.length;
+    const arrAcLength=arrAc.length;
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -18,9 +22,9 @@ const Buttonsgrp = () => {
   };
   return (<div>
     <Tabs value={value} onChange={handleChange} className='Bbuttonsgrp' centered >
-        <Tab style={{textTransform: 'none'}} label= "Education" value={0}></Tab>
-        <Tab style={{textTransform: 'none'}} label="Work Experiences" value={1}/>
-        <Tab style={{textTransform: 'none'}} label="Achievements" value={2}/>
+        <Tab style={{textTransform: 'none'}} label= {`Education(${arrLength})`} value={0}/>
+        <Tab style={{textTransform: 'none'}} label= {`Work Experiences(${arrWLength})`} value={1}/>
+        <Tab style={{textTransform: 'none'}} label= {`Achievements(${arrAcLength})`} value={2}/>
     </Tabs>   
     <hr className='hr'/>
 
