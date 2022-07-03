@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useUser } from '../context/CodeContext';
 import './ZLayout.css';
 
 
 export const ImageUpload = () => {
     const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
+    const {preview, setPreview} = useUser()
 
     useEffect(() => {
         if (!selectedFile) {
@@ -30,7 +31,7 @@ export const ImageUpload = () => {
         <div className='uploadphoto'>
             <label htmlFor="filePicker" style={{ background:"lightgrey" }}></label>
             <input id="filePicker" accept="image/*" type={"file"} onChange={onSelectFile}/>
-            {selectedFile &&  <img src={preview} /> }
+            {selectedFile &&  <img src={preview}/> }
         </div>
     )
 }

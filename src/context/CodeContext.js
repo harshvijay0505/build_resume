@@ -20,6 +20,9 @@ export function UserProvider({ children }) {
     const [arrW, setArrW] = React.useState([]);
     const [arrAc, setArrAc] = React.useState([]);
 
+    const [preview, setPreview] = React.useState()
+
+
     const updateUserEdu = (instituteEducation, degreeEducation, startdateEducation, enddateEducation, descriptionEducation, indexEducation) => {
         arr[indexEducation] = {
             ...arr[indexEducation],
@@ -69,7 +72,7 @@ export function UserProvider({ children }) {
     }
 
 
-    const value = { exportUserData, updateUserEdu, updateUserWork, updateUserAchieve, arr, setArr, arrW, setArrW, arrAc, setArrAc, Aid, setAId, Wid, setWId, Eid, setEId, userName, setUserName, userEmail, setUserEmail, userBio, setUserBio }
+    const value = {preview, setPreview, exportUserData, updateUserEdu, updateUserWork, updateUserAchieve, arr, setArr, arrW, setArrW, arrAc, setArrAc, Aid, setAId, Wid, setWId, Eid, setEId, userName, setUserName, userEmail, setUserEmail, userBio, setUserBio }
 
     return (<>
         <UserContext.Provider value={value}>{children}</UserContext.Provider>

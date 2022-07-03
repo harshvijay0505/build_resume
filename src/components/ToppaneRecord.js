@@ -1,13 +1,12 @@
 import { Avatar, Button } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import React, { useState } from 'react'
-import ImageUpload from './ImageUpload';
 import { useUser } from '../context/CodeContext';
 import './ZLayout.css';
 import Names from './TopPane';
 
 const ToppaneRecord = () => {
-  const {userName,userEmail,userBio}=useUser()
+  const {userName,userEmail,userBio,preview}=useUser()
   const[flag,setFlag]=useState(false)
 
   const handleClick = () => {
@@ -21,7 +20,7 @@ return (
         <div className='container'>
     <div className='leftpane'>
         
-    <Avatar sx={{ bgcolor: grey , height: '200px', width: '200px' }}/>       
+    <Avatar sx={{ bgcolor: grey , height: '200px', width: '200px' }}><img src={preview}/></Avatar>       
         
 
     </div>
