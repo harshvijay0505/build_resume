@@ -39,13 +39,13 @@ const handleChangeEmailid = (event) => {
     <>     
     {flag?<ToppaneRecord/>:<>
 
-    <div className='container'>
-    <div className='leftpane'>
-        
-    <Avatar sx={{ bgcolor: grey , height: '200px', width: '200px' }}><ImageUpload/></Avatar>
-    </div>
-    <div className='middlepane'>
-        <div className='nameContainer'>
+    <container>
+        <div className='leftpane'>
+            <ImageUpload/>
+        </div>
+
+        <div className='middlepane'>
+            <div className='nameContainer'>
                 <label className='label'>Name</label>
                 <TextField value={nname} onChange={handleChangeName} id="outlined-basic" style={{width:"100%"}} variant="outlined" size="small"/>
                 <label className='label'>Email-ID</label>
@@ -53,13 +53,13 @@ const handleChangeEmailid = (event) => {
                 <div className='label'>
                 <Button style={{textTransform: 'none'}} variant="contained" onClick={handleClick}>Save</Button>
                 </div>
+             </div> 
         </div>
-    </div>
-    <div className='rightpane'>
-        <label className='label'>Short Bio</label>
-        <textarea value={desc} className='textareaR' onChange={handleChangeDesc}/>
-    </div>  
-        </div> 
+        <div className='rightpane'>
+             <label className='label'>Short Bio</label>
+             <textarea value={desc} className='textareaR' onChange={handleChangeDesc}/>
+           </div>  
+        </container> 
         </>} 
     </>
   )

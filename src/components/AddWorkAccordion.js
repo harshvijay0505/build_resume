@@ -43,11 +43,11 @@ export default function CustomizedAccordionW() {
 
   const [open, setOpen] = React.useState(false);
 
-  const {arrW, setArrW,updateUserWork} = useUser();
+  const { arrW, setArrW, updateUserWork } = useUser();
 
-  const [edits,setEdits]=React.useState();
+  const [edits, setEdits] = React.useState();
 
-  const {Wid, setWId} = useUser();
+  const { Wid, setWId } = useUser();
 
 
 
@@ -69,6 +69,11 @@ export default function CustomizedAccordionW() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setComp();
+    setRolW();
+    setStrW();
+    setEndW();
+    setDesW();
   };
 
   const handleClose = () => {
@@ -77,9 +82,9 @@ export default function CustomizedAccordionW() {
 
   };
 
-  let removeHandler=(e)=>{
-    let key=e.target.getAttribute("removeelement")
-    setArrW(arrW.filter(items=>items.Wid!==key));
+  let removeHandler = (e) => {
+    let key = e.target.getAttribute("removeelement")
+    setArrW(arrW.filter(items => items.Wid !== key));
   }
 
   const editHandler = (data) => {
@@ -89,14 +94,14 @@ export default function CustomizedAccordionW() {
     setStrW(data.startdateW)
     setEndW(data.enddateW)
     setDesW(data.descW)
-    
+
   };
 
 
   return (
     <div>
       <Button
-      style={{textTransform: 'none',width: '100%'}}
+        style={{ textTransform: 'none', width: '100%' }}
         variant="outlined"
         onClick={handleClickOpen}
         className="addnewbtn"
@@ -105,7 +110,7 @@ export default function CustomizedAccordionW() {
       </Button>
 
       <div className="addWork">
-        <Dialog open={open} onClose={handleClose} style = {{width: '100%'}}>
+        <Dialog open={open} onClose={handleClose} style={{ width: '100%' }}>
           <DialogTitle>
             <b>Add new work experience</b>
           </DialogTitle>
@@ -117,7 +122,7 @@ export default function CustomizedAccordionW() {
               autoFocus
               margin="dense"
               id="CompanyW"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
 
             />
             <p className="label">Role</p>
@@ -127,7 +132,7 @@ export default function CustomizedAccordionW() {
               autoFocus
               margin="dense"
               id="RoleW"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
 
             />
 
@@ -135,7 +140,7 @@ export default function CustomizedAccordionW() {
               <div className="workAddDateColumn">
                 <p className="label">Start date</p>
                 <TextField
-                type="month"
+                  type="month"
                   onChange={handleChangeStr}
                   value={strW}
                   autoFocus
@@ -147,8 +152,8 @@ export default function CustomizedAccordionW() {
               <div className="workAddDateColumn">
                 <p className="label">Last date</p>
                 <TextField
-                placeholder="Month Year"
-                type="month"
+                  placeholder="Month Year"
+                  type="month"
                   onChange={handleChangeEnd}
                   value={endW}
                   autoFocus
@@ -166,22 +171,22 @@ export default function CustomizedAccordionW() {
               autoFocus
               margin="dense"
               id="DescriptionW"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
 
               className="textareaW"
             ></textarea>
           </DialogContent>
           <DialogActions>
             <Button
-            style={{textTransform: 'none'}}
+              style={{ textTransform: 'none' }}
               variant="contained"
               onClick={() => {
-                setWId(Wid+1)
+                setWId(Wid + 1)
                 setOpen(false)
                 setArrW([
                   ...arrW,
                   {
-                    Wid:Wid+1,
+                    Wid: Wid + 1,
                     companyW: compW,
                     roleW: rolW,
                     startdateW: strW,
@@ -189,21 +194,21 @@ export default function CustomizedAccordionW() {
                     descW: desW,
                   },
                 ]);
-                
+
 
               }}
             >
               Save
             </Button>
-            <Button onClick={handleClose} style={{textTransform: 'none'}}>Cancel</Button>
+            <Button onClick={handleClose} style={{ textTransform: 'none' }}>Cancel</Button>
           </DialogActions>
         </Dialog>
       </div>
 
       {/************** Accordian ***************/}
-      
+
       <div className="accordianButton">
-        {arrW.map((key,index) => {
+        {arrW.map((key, index) => {
           return (
             <>
               <Accordion>
@@ -213,104 +218,104 @@ export default function CustomizedAccordionW() {
                   </div>
                   <div className="datefloatright">
                     <Typography> {key.startdateW} </Typography>
-                    <Typography style={{marginLeft:'10px',marginRight:'10px'}}> to </Typography>
+                    <Typography style={{ marginLeft: '10px', marginRight: '10px' }}> to </Typography>
                     <Typography> {key.enddateW} </Typography>
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Typography style={{wordWrap:"break-word",marginLeft:'3.5%', marginTop:'2%', color:'grey',fontSize:'small'}}><b>Role</b></Typography>
-                  <Typography style={{wordWrap:"break-word",marginLeft:'3.5%', marginRight:'3.5%'}}>{key.roleW}</Typography>
-                  <Typography style={{wordWrap:"break-word",marginLeft:'3.5%', marginTop:'2%', color:'grey',fontSize:'small'}}><b>Description</b></Typography>
-                  <Typography style={{wordWrap:"break-word",marginLeft:'3.5%', marginRight:'3.5%'}}>{key.descW}</Typography>
+                  <Typography style={{ wordWrap: "break-word", marginLeft: '3.5%', marginTop: '2%', color: 'grey', fontSize: 'small' }}><b>Role</b></Typography>
+                  <Typography style={{ wordWrap: "break-word", marginLeft: '3.5%', marginRight: '3.5%' }}>{key.roleW}</Typography>
+                  <Typography style={{ wordWrap: "break-word", marginLeft: '3.5%', marginTop: '2%', color: 'grey', fontSize: 'small' }}><b>Description</b></Typography>
+                  <Typography style={{ wordWrap: "break-word", marginLeft: '3.5%', marginRight: '3.5%' }}>{key.descW}</Typography>
                 </AccordionDetails>
-                <Button onClick={()=>{editHandler(key)}} variant="outlined" style={{textTransform: 'none', marginBottom:'10px' ,marginTop:'10px', marginLeft:'10px'}}>Edit</Button>
-                <Button removeelement={key.Wid} onClick={removeHandler} variant="outlined" style={{textTransform: 'none', marginBottom:'10px' ,marginTop:'10px', marginLeft:'10px'}}>Delete</Button>
+                <Button onClick={() => { editHandler(key) }} variant="outlined" style={{ textTransform: 'none', marginBottom: '10px', marginTop: '10px', marginLeft: '10px' }}>Edit</Button>
+                <Button removeelement={key.Wid} onClick={removeHandler} variant="outlined" style={{ textTransform: 'none', marginBottom: '10px', marginTop: '10px', marginLeft: '10px' }}>Delete</Button>
 
 
                 <div className="addWork">
-        <Dialog open={edits} onClose={handleClose} style = {{width: '100%'}}>
-          <DialogTitle>
-            <b>Edit work experience</b>
-          </DialogTitle>
-          <DialogContent>
-            <p className="label">Institute</p>
-            <TextField
-              value={compW}
-              onChange={handleChangeIns}
-              autoFocus
-              margin="dense"
-              id="Institute"
-              style = {{width: '100%'}}
+                  <Dialog open={edits} onClose={handleClose} style={{ width: '100%' }}>
+                    <DialogTitle>
+                      <b>Edit work experience</b>
+                    </DialogTitle>
+                    <DialogContent>
+                      <p className="label">Institute</p>
+                      <TextField
+                        value={compW}
+                        onChange={handleChangeIns}
+                        autoFocus
+                        margin="dense"
+                        id="Institute"
+                        style={{ width: '100%' }}
 
-            />
-            
-            <p className="label">Degree</p>
-            <TextField
-              value={rolW}
-              onChange={handleChangeDeg}
-              autoFocus
-              margin="dense"
-              id="Degree"
-              style = {{width: '100%'}}
+                      />
 
-            />
+                      <p className="label">Degree</p>
+                      <TextField
+                        value={rolW}
+                        onChange={handleChangeDeg}
+                        autoFocus
+                        margin="dense"
+                        id="Degree"
+                        style={{ width: '100%' }}
 
-            <div className="workAddDate">
-              <div className="workAddDateColumn">
-                <p className="label">Start date</p>
-                <TextField
-                                type="month"
+                      />
 
-                  onChange={handleChangeStr}
-                  value={strW}
-                  autoFocus
-                  margin="dense"
-                  id="Start date"
-                  style={{ width: "262px" }}
-                />
-              </div>
-              <div className="workAddDateColumn">
-                <p className="label">Last date</p>
-                <TextField
-                                type="month"
+                      <div className="workAddDate">
+                        <div className="workAddDateColumn">
+                          <p className="label">Start date</p>
+                          <TextField
+                            type="month"
 
-                  onChange={handleChangeEnd}
-                  value={endW}
-                  autoFocus
-                  margin="dense"
-                  id="Last date"
-                  style={{ width: "262px" }}
-                />
-              </div>
-            </div>
+                            onChange={handleChangeStr}
+                            value={strW}
+                            autoFocus
+                            margin="dense"
+                            id="Start date"
+                            style={{ width: "262px" }}
+                          />
+                        </div>
+                        <div className="workAddDateColumn">
+                          <p className="label">Last date</p>
+                          <TextField
+                            type="month"
 
-            <p className="label">Description</p>
-            <textarea
-              value={desW}
-              onChange={handleChangeDes}
-              autoFocus
-              margin="dense"
-              id="Description"
-              style = {{width: '100%'}}
+                            onChange={handleChangeEnd}
+                            value={endW}
+                            autoFocus
+                            margin="dense"
+                            id="Last date"
+                            style={{ width: "262px" }}
+                          />
+                        </div>
+                      </div>
 
-              className="textareaW"
-            ></textarea>
-          </DialogContent>
-          <DialogActions>
-            <Button
-            style={{textTransform: 'none'}}
-              variant="contained"
-              onClick={() => {
-                setEdits(false)
-                updateUserWork(compW,rolW,strW,endW,desW,index)             
-              }}
-            >
-              Save
-            </Button>
-            <Button style={{textTransform: 'none'}} onClick={handleClose}>Cancel</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+                      <p className="label">Description</p>
+                      <textarea
+                        value={desW}
+                        onChange={handleChangeDes}
+                        autoFocus
+                        margin="dense"
+                        id="Description"
+                        style={{ width: '100%' }}
+
+                        className="textareaW"
+                      ></textarea>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        style={{ textTransform: 'none' }}
+                        variant="contained"
+                        onClick={() => {
+                          setEdits(false)
+                          updateUserWork(compW, rolW, strW, endW, desW, index)
+                        }}
+                      >
+                        Save
+                      </Button>
+                      <Button style={{ textTransform: 'none' }} onClick={handleClose}>Cancel</Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
               </Accordion>
             </>
           );

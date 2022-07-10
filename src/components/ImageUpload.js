@@ -1,39 +1,76 @@
-import React, { useEffect, useState } from 'react'
 import { useUser } from '../context/CodeContext';
-import './ZLayout.css';
+import { useState } from 'react';
 
 
-export const ImageUpload = () => {
-    const [selectedFile, setSelectedFile] = useState()
-    const {preview, setPreview} = useUser()
+const UploadAndDisplayImage = () => {
+  const[flag,setFlag]=useState(true)
 
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview(undefined)
-            return
-        }
+  const {selectedImage, setSelectedImage} = useUser();
 
-        const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
-
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
-    const onSelectFile = e => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
-        }
-        setSelectedFile(e.target.files[0])
+  // This function will be triggered when the file field change
+  const imageChange = (e) => {
+    setFlag(false)
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+      
     }
+  };
 
-    return (
-        <div className='uploadphoto'>
-            <label htmlFor="filePicker" style={{ background:"lightgrey" }}></label>
-            <input id="filePicker" accept="image/*" type={"file"} onChange={onSelectFile}/>
-            {selectedFile &&  <img src={preview}/> }
-        </div>
-    )
-}
+  // This function will be triggered when the "Remove This Image" button is clicked
+  const removeSelectedImage = () => {
+    setSelectedImage();
+    setFlag(true)
+  };
 
-export default ImageUpload
+  return (
+    <>
+      <div>
+      {flag? <input
+          accept="image/*"
+          type="file"
+          onChange={imageChange}
+          style={styles.container}
+        />:<>
+
+        {selectedImage && (
+          <div style={styles.preview}>
+            <img
+              src={URL.createObjectURL(selectedImage)}
+              style={styles.image}
+              alt="Thumb"
+            />
+            <button onClick={removeSelectedImage} style={styles.delete}>
+              Remove
+            </button>
+          </div>
+        )}</>}
+      </div>
+    </>
+  );
+};
+
+export default UploadAndDisplayImage;
+
+// Just some styles
+const styles = {
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop:"40%",
+  },
+  preview: {
+    // marginTop: 50,
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: { maxWidth: "50%", maxHeight: '320vh' },
+  delete: {
+    cursor: "pointer",
+    padding: 5,
+    maxWidth: "14.1vh",
+    maxHeight:"14vh",
+    background: "lightgrey",
+    color: "black",
+    border: "none",
+  },
+};

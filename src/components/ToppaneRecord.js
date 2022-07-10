@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 import { useUser } from '../context/CodeContext';
 import './ZLayout.css';
 import Names from './TopPane';
+import { borderRadius } from '@mui/system';
 
 const ToppaneRecord = () => {
-  const {userName,userEmail,userBio,preview}=useUser()
+  const {userName,userEmail,userBio,selectedImage}=useUser()
   const[flag,setFlag]=useState(false)
 
   const handleClick = () => {
@@ -17,12 +18,16 @@ return (
 <> 
 {flag?<Names/>:<>
 <div>
-        <div className='container'>
+        <container>
     <div className='leftpane'>
-        
-    <Avatar sx={{ bgcolor: grey , height: '200px', width: '200px' }}><img src={preview}/></Avatar>       
-        
 
+        {selectedImage?
+          <Avatar sx={{ bgcolor: grey , height: '22vh', width: '12.5vw'}}>
+          <img src={URL.createObjectURL(selectedImage)} /></Avatar>
+          :<>
+          <Avatar sx={{ bgcolor: grey , height: '22vh', width: "12.5vw"}}/>
+          </>}
+           
     </div>
     <div className='middlepane-output'>
         <div className='nameContainer'>
@@ -35,7 +40,7 @@ return (
                 
         </div>
         
-    </div> 
+    </container> 
     
     </div></>}</>
   )

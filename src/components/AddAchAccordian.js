@@ -11,7 +11,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import {useUser} from '../context/CodeContext'
+import { useUser } from '../context/CodeContext'
 import "./ZLayout.css";
 
 const AccordionSummary = styled((props) => (
@@ -39,11 +39,11 @@ export default function CustomizedAccordionAc() {
 
   const [open, setOpen] = React.useState(false);
 
-  const {arrAc, setArrAc} = useUser();
+  const { arrAc, setArrAc } = useUser();
 
-  const [edits,setEdits]=React.useState();
+  const [edits, setEdits] = React.useState();
 
-  const {Aid, setAId,updateUserAchieve} = useUser();
+  const { Aid, setAId, updateUserAchieve } = useUser();
 
 
 
@@ -62,7 +62,7 @@ export default function CustomizedAccordionAc() {
     setTit()
     setDat()
     setDescAc()
-    
+
   };
 
   const handleClose = () => {
@@ -71,9 +71,9 @@ export default function CustomizedAccordionAc() {
 
   };
 
-  let removeHandler=(e)=>{
-    let data=e.target.getAttribute("removeelement")
-    setArrAc(arrAc.filter(items=>items.Aid!==data));
+  let removeHandler = (e) => {
+    let data = e.target.getAttribute("removeelement")
+    setArrAc(arrAc.filter(items => items.Aid !== data));
   }
 
 
@@ -87,7 +87,7 @@ export default function CustomizedAccordionAc() {
   return (
     <div>
       <Button
-      style={{textTransform: 'none'}}
+        style={{ textTransform: 'none' }}
         variant="outlined"
         onClick={handleClickOpen}
         fullWidth
@@ -108,16 +108,16 @@ export default function CustomizedAccordionAc() {
               autoFocus
               margin="dense"
               id="Title"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
             />
             <p className="label">Date</p>
             <TextField
-            type="month"
+              type="month"
               onChange={handleChangeDeg}
               autoFocus
               margin="dense"
               id="Date"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
 
             />
 
@@ -127,32 +127,32 @@ export default function CustomizedAccordionAc() {
               autoFocus
               margin="dense"
               id="DescriptionC"
-              style = {{width: '100%'}}
+              style={{ width: '100%' }}
 
               className="textareaW"
             ></textarea>
           </DialogContent>
           <DialogActions>
             <Button
-            style={{textTransform: 'none'}}
+              style={{ textTransform: 'none' }}
               variant="contained"
               onClick={() => {
-                setAId(Aid+1)
+                setAId(Aid + 1)
                 setOpen(false)
                 setArrAc([
                   ...arrAc,
                   {
-                    Aid:Aid+1,
+                    Aid: Aid + 1,
                     title: tit,
                     date: dat,
                     descAch: descAc,
                   },
                 ]);
-            }}
+              }}
             >
               Save
             </Button>
-            <Button onClick={handleClose} style={{textTransform: 'none'}}>Cancel</Button>
+            <Button onClick={handleClose} style={{ textTransform: 'none' }}>Cancel</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -160,10 +160,10 @@ export default function CustomizedAccordionAc() {
       {/************** Accordian ***************/}
 
       <div className="accordianButton">
-        {arrAc.map((data,index) => {
+        {arrAc.map((data, index) => {
           return (
             <>
-            
+
               <Accordion>
                 <AccordionSummary>
                   <div className="titleAchievefloatleft">
@@ -174,68 +174,68 @@ export default function CustomizedAccordionAc() {
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Typography style={{marginLeft:'3.5%', marginRight:'3.5%', marginTop:'1%', color:'grey',fontSize:'small'}}><b>Description</b></Typography>
-                  <Typography style={{marginLeft:'3.5%', marginRight:'3.5%', wordWrap:"break-word"}}>{data.descAch}</Typography>
+                  <Typography style={{ marginLeft: '3.5%', marginRight: '3.5%', marginTop: '1%', color: 'grey', fontSize: 'small' }}><b>Description</b></Typography>
+                  <Typography style={{ marginLeft: '3.5%', marginRight: '3.5%', wordWrap: "break-word" }}>{data.descAch}</Typography>
                 </AccordionDetails>
 
-                <Button onClick={()=>{editHandler(data)}} variant="outlined" style={{textTransform: 'none', marginBottom:'10px' ,marginTop:'10px', marginLeft:'10px'}}>Edit</Button>
-                <Button removeelement={data.Aid} onClick={removeHandler} variant="outlined" style={{textTransform: 'none', marginBottom:'10px' ,marginTop:'10px', marginLeft:'10px'}}>Delete</Button>
+                <Button onClick={() => { editHandler(data) }} variant="outlined" style={{ textTransform: 'none', marginBottom: '10px', marginTop: '10px', marginLeft: '10px' }}>Edit</Button>
+                <Button removeelement={data.Aid} onClick={removeHandler} variant="outlined" style={{ textTransform: 'none', marginBottom: '10px', marginTop: '10px', marginLeft: '10px' }}>Delete</Button>
 
-                
+
 
                 <div className="addWork">
-        <Dialog open={edits} onClose={handleClose} fullWidth>
-          <DialogTitle>
-            <b>Edit achievement</b>
-          </DialogTitle>
-          <DialogContent>
-            <p className="label">Title</p>
-            <TextField
-              value={tit}
-              onChange={handleChangeIns}
-              autoFocus
-              margin="dense"
-              id="Title"
-              fullWidth
-            />
-            <p className="label">Date</p>
-            <TextField
-                            type="month"
+                  <Dialog open={edits} onClose={handleClose} fullWidth>
+                    <DialogTitle>
+                      <b>Edit achievement</b>
+                    </DialogTitle>
+                    <DialogContent>
+                      <p className="label">Title</p>
+                      <TextField
+                        value={tit}
+                        onChange={handleChangeIns}
+                        autoFocus
+                        margin="dense"
+                        id="Title"
+                        fullWidth
+                      />
+                      <p className="label">Date</p>
+                      <TextField
+                        type="month"
 
-              value={dat}
-              onChange={handleChangeDeg}
-              autoFocus
-              margin="dense"
-              id="Date"
-              fullWidth
-            />
+                        value={dat}
+                        onChange={handleChangeDeg}
+                        autoFocus
+                        margin="dense"
+                        id="Date"
+                        fullWidth
+                      />
 
-            <p className="label">Description</p>
-            <textarea
-              value={descAc}
-              onChange={handleChangeDes}
-              autoFocus
-              margin="dense"
-              id="Description"
-              fullWidth
-              className="textareaW"
-            ></textarea>
-          </DialogContent>
-          <DialogActions>
-            <Button
-            style={{textTransform: 'none'}}
-              variant="contained"
-              onClick={() => {
-                setEdits(false)
-                updateUserAchieve(tit,dat,descAc,index)
-              }}
-            >
-              Save
-            </Button>
-            <Button onClick={handleClose} style={{textTransform: 'none'}}>Cancel</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+                      <p className="label">Description</p>
+                      <textarea
+                        value={descAc}
+                        onChange={handleChangeDes}
+                        autoFocus
+                        margin="dense"
+                        id="Description"
+                        fullWidth
+                        className="textareaW"
+                      ></textarea>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        style={{ textTransform: 'none' }}
+                        variant="contained"
+                        onClick={() => {
+                          setEdits(false)
+                          updateUserAchieve(tit, dat, descAc, index)
+                        }}
+                      >
+                        Save
+                      </Button>
+                      <Button onClick={handleClose} style={{ textTransform: 'none' }}>Cancel</Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
               </Accordion>
             </>
           );
